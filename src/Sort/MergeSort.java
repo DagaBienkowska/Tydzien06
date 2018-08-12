@@ -10,14 +10,16 @@ public class MergeSort {
         List<int[]> parts = divideArray(array1);
         System.out.println(Arrays.toString(parts.get(0)));
         System.out.println(Arrays.toString(parts.get(1)));
-        int[] part1 = parts.get(0);
-        int[] part2 = parts.get(1);
-        int[] merged = mergeArrays(part1, part2);
+        int[] merged = mergeArrays(parts.get(0), parts.get(1));
         System.out.println("Połączone połówki: " + Arrays.toString(merged));
-        int[] array2 = {3, 6, 2, 7};
-        int[] array3 = {6, 4, 7, 3, 8, 9, 0};
+        int[] array2 = {3, 12, 2, 45};
+        int[] array3 = {6, 4, 7, 54, 8, 9, 0, 5,19};
         int[] merged2 = mergeArrays2(array2, array3);
         System.out.println("Połączone połówki: " + Arrays.toString(merged2));
+        SelectionSort.selectionSort(parts.get(0));
+        SelectionSort.selectionSort(parts.get(1));
+        System.out.println(Arrays.toString(parts.get(0)) +"\n" +Arrays.toString(parts.get(1)));
+
 
     }
 
@@ -38,7 +40,7 @@ public class MergeSort {
 
     public static int[] mergeArrays(int[] input, int[] input2) {
         int[] merged = new int[input.length + input2.length];
-        for (int i = 0; i < merged.length; i++) {
+        for (int i = 0; i < input.length * 2; i++) {
             if (i % 2 == 0) {
                 merged[i] = input[i / 2];
             } else {
@@ -49,16 +51,31 @@ public class MergeSort {
     }
 
     public static int[] mergeArrays2(int[] input, int[] input2) {
+        int counter = input.length;
         int[] merged = new int[input.length + input2.length];
-        for (int i = 0; i < merged.length; i++) {
-            if (i % 2 == 0 && i < input.length*2) {
+        for (int i = 0; i < input.length * 2; i++) {
+            if (i % 2 == 0){
+                merged[i] = input[i/2];
+            } else {
+                merged[i] = input2[i/2];
+            }
+        }
+        for (int i = input.length * 2; i < merged.length; i++){
+            merged[i] = input2[counter];
+            counter++;
+        }
+        return merged;
+    }
+    public static int[] mergeArraysSorted(int[] input, int[] input2) {
+        int[] merged = new int[input.length + input2.length];
+        for (int i = 0; i < input.length * 2; i++) {
+            if (i % 2 == 0) {
                 merged[i] = input[i / 2];
-            } else if (i > input.length*2){
-                merged[i] = input2[i / 2+1];
             } else {
                 merged[i] = input2[i / 2];
             }
         }
         return merged;
     }
+
 }
