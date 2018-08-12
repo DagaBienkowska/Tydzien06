@@ -4,14 +4,16 @@ import java.util.Arrays;
 
 public class BubbleSortZadania {
     public static void main(String[] args) {
-        int[] array1 = {4,2,9,8,5};
+        int[] array1 = {42,23,91,87,53};
         System.out.println(Arrays.toString(array1));
-        System.out.println(Arrays.toString(switchElements(array1, 2, 4)));
-        withIndex(array1);
-        System.out.println();
-        printArray(array1);
-        System.out.println();
-        printAndSwap(array1);
+//        System.out.println(Arrays.toString(switchElements(array1, 2, 4)));
+//        withIndex(array1);
+//        System.out.println();
+//        printArray(array1);
+//        System.out.println();
+//        printAndSwap(array1);
+//        System.out.println();
+        swapIf(array1);
     }
     public static int[] switchElements(int[] input, int index1, int index2){
         int temp = input[index2];
@@ -39,6 +41,18 @@ public class BubbleSortZadania {
         for (int i = 0; i < input.length - 1; i++){
            switchElements(input, i, i+1);
            withIndex(input);
+        }
+    }
+
+    public static void swapIf (int[] input){
+        withIndex(input);
+        for (int i = 0; i < input.length - 1; i++){
+            if (input[i] > input[i + 1]) {
+                switchElements(input, i, i + 1);
+                withIndex(input);
+            } else {
+                withIndex(input);
+            }
         }
     }
 }
