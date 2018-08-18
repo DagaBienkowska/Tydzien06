@@ -1,39 +1,44 @@
 package Sort;
 
+import java.util.Arrays;
+
 public class MergeSort2 {
     public static void main(String[] args) {
-        int[] array1 = {234, 45, 234, 67, 456, 23, 157, 59, 34, 135, 178, 655};
+        Integer[] array1 = {234, 45, 234, 67, 456, 23, 157, 59, 34, 135, 178, 655};
+        System.out.println(Arrays.toString(array1));
         MergeSort(array1, 0, array1.length-1);
+        System.out.println(Arrays.toString(array1));
     }
 
-    public static int[] Merge(int[] input, int left, int mid, int right) {
-        int i;
-        int j;
-        int[] tab = new int[input.length];
-        for (i = mid + 1; i > left; i--) {
-            tab[i - 1] = input[i - 1];
-        }
-        for (j = mid; j < right; j++) {
-            tab[right + mid - j] = input[j + 1];
-        }
-        for (int k = left; k <= right; k++) {
-            if (tab[j] < tab[i]) {
-                input[k] = tab[j];
-                j--;
-            } else {
-                input[k] = tab[i];
-                i++;
-            }
-        }
-        return input;
-    }
 
-    public static int[] MergeSort(int[] input, int left, int right) {
+//
+    private static Integer[] MergeSort(Integer[] input, int left, int right) {
         if (left < right) {
             int mid = (left + right) / 2;
             MergeSort(input, left, mid);
             MergeSort(input, mid + 1, right);
-            Merge(input, left, mid, right);
+            merge2(input, left, mid, right);
+        }
+        return input;
+    }
+
+    private static Integer[] merge2(Integer[] input, int left, int mid, int right){
+        Integer[] temp = new Integer[input.length];
+        int leftIndex = left;
+        int rightIndex = mid + 1;
+
+        for (int k = left; k <= right; k++){
+            if (leftIndex > mid || (rightIndex <=right && input[rightIndex] < input[leftIndex])) {
+                temp[k] = input[rightIndex];
+                rightIndex++;
+            } else {
+                temp[k] = input[leftIndex];
+                leftIndex++;
+            }
+        }
+
+        for (int k = left; k <= right; k++){
+            input[k] = temp[k];
         }
         return input;
     }
