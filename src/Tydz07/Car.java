@@ -35,6 +35,6 @@ public class Car {
     @Override
     public String toString() {
         return
-                 name + " " + productionDate + " " + engine + "\n";
+                "\n" + name + " " + productionDate + " " + engine;
     }
 }
